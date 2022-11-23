@@ -1,0 +1,10 @@
+% This file contains the login-data for the MYM Job-Manager
+% There are two options to use this file:
+% 	1. It must be named "mym_job_manager_login.txt" and on you MATLAB seach path
+%	2. You can specify the path to this file when calling (mym_parallel)
+
+db_server       = 127.0.0.1
+db_database     = mym_parallel
+db_passwd       = eik2ienie4oo
+db_user         = mym
+db_table        = mym
