@@ -35,7 +35,7 @@ The easiest way to do so is by using the MATLAB built-in GUI (requires R2016b or
 
 In order to use the distributed scheduler, you must have a valid login on the database. You can then create a new task by calling either on the workstation or on your desktop PC:
 ```
-ob = mym_parallel.create( no_wps, task_id, login_file )
+job = mym_parallel.create( no_wps, task_id, login_file )
 ```
 This specifies a number of work packages and a task id. The "task_id" must be a unique number that identifies the computing task. You need to include this id in your evaluation script (which runs in parallel) in order to connect to the correct scheduler. The "login_file" is optional. If it is not specifies, the default file "mym_parallel_login.txt" is used. You then have to connect to scheduler by:
 ```
@@ -52,9 +52,9 @@ job.set_finished
 ```
 to indicate the the current WP has ended. Then you can call the next WP. A typical parallel script then looks like:
 ```
-job = mym_parallel( task_id, 'user', 'pass' )     % Connect
-while job.get_wp           % Obtain WP
-   wp = job.wp;            % WP number
+job = mym_parallel( task_id )     % Connect
+while job.get_wp                  % Obtain WP
+   wp = job.wp;                   % WP number
 
    % Your computations
 
@@ -70,22 +70,19 @@ exit
 ## Advanced features
 ### WP status
 Each WP has 5 different states. Those can be seen when calling "job.status". The states are indicated by a number from 0-4 with the meaning:
-0. he WP is ready to run. The lowest WP number with "status=0" will be returned when calling "get_wp". In this case, the state of the WP is changed to "1".
-1. The WP is running. The state is changes to "2" by calling "job.set_finished".
-2. The WP is finished.
-3. All WPs are finished. This state is set by calling "job.is_finished" for the first time after all WPs are in state "2".
-4. The WP is suspended. It has not started yet but will also not be returned by calling "job.get_wp".
+* (0) he WP is ready to run. The lowest WP number with "status=0" will be returned when calling "get_wp". In this case, the state of the WP is changed to "1".
+* (1) The WP is running. The state is changes to "2" by calling "job.set_finished".
+* (2) The WP is finished.
+* (3) All WPs are finished. This state is set by calling "job.is_finished" for the first time after all WPs are in state "2".
+* (4) The WP is suspended. It has not started yet but will also not be returned by calling "job.get_wp".
 
 ### Suspending and resetting
 
-* job.suspend
-You can suspend all ready WPs (status=0) by calling "job.suspend". In this case, all running WPs will finish and no new WPs will be returned by calling "job.get_wp".
+* `job.suspend` - You can suspend all ready WPs (status=0) by calling "job.suspend". In this case, all running WPs will finish and no new WPs will be returned by calling "job.get_wp".
 
-* job.reset
-Sets all running WPs (status=1) to ready (status=0), so they can be run again if "get_wp" is called. This is useful when a WP crashed and thus did not call "job.set_finished". Hence, it will always remain in running state.
+* `job.reset` - Sets all running WPs (status=1) to ready (status=0), so they can be run again if "get_wp" is called. This is useful when a WP crashed and thus did not call "job.set_finished". Hence, it will always remain in running state.
 
-* job.reset('all')
-Sets all WPs (status=1|2|3|4) to ready (status=0).
+* `job.reset('all')` - Sets all WPs (status=1|2|3|4) to ready (status=0).
 
 ### Locking
 When you call "job.lock", the job enters a single-thread section. Only one WP can hold a lock at any given time. Hence, the code between calling "job.lock" and "job.unlock" does not run in parallel on several nodes. This can be used, for example, to synchronize write-access to a file where only one WP can write at a given time. If a seconds WP calls "job.lock" while the lock is already owned by another WP, the second WP will wait until the lock is released.
