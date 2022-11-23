@@ -6,9 +6,9 @@ MATLAB often does not fully use the computing power of modern multi core systems
 This class requires the MySQL API for MATLAB to be installed. You can get it from:
    https://github.com/datajoint/mym
 
-# Setup:
+## Setup:
 
-## MySQL Setup
+### MySQL Setup
 
 * Install MySQL on your system and make sure the service is running
 * Login as root e.g. by `sudo mysql -u root`
@@ -23,7 +23,7 @@ EXIT
 If you change these settings, manage multiple users or connect to the database through the network, you must edit the `mym_parallel_login.txt` for each user.
 
 
-## Install MATLAB MySQL API 
+### Install MATLAB MySQL API 
 The source code can be found at: from https://github.com/datajoint/mym
 The easiest way to do so is by using the MATLAB built-in GUI (requires R2016b or later):
 
