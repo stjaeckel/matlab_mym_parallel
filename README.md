@@ -70,11 +70,11 @@ exit
 ## Advanced features
 ### WP status
 Each WP has 5 different states. Those can be seen when calling "job.status". The states are indicated by a number from 0-4 with the meaning:
-* (0) he WP is ready to run. The lowest WP number with "status=0" will be returned when calling "get_wp". In this case, the state of the WP is changed to "1".
-* (1) The WP is running. The state is changes to "2" by calling "job.set_finished".
-* (2) The WP is finished.
-* (3) All WPs are finished. This state is set by calling "job.is_finished" for the first time after all WPs are in state "2".
-* (4) The WP is suspended. It has not started yet but will also not be returned by calling "job.get_wp".
+* `(0)` he WP is ready to run. The lowest WP number with "status=0" will be returned when calling "get_wp". In this case, the state of the WP is changed to "1".
+* `(1)` The WP is running. The state is changes to "2" by calling "job.set_finished".
+* `(2)` The WP is finished.
+* `(3)` All WPs are finished. This state is set by calling "job.is_finished" for the first time after all WPs are in state "2".
+* `(4)` The WP is suspended. It has not started yet but will also not be returned by calling "job.get_wp".
 
 ### Suspending and resetting
 
