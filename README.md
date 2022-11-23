@@ -85,7 +85,7 @@ Each WP has 5 different states. Those can be seen when calling "job.status". The
 * `job.reset('all')` - Sets all WPs (status=1|2|3|4) to ready (status=0).
 
 ### Locking
-When you call "job.lock", the job enters a single-thread section. Only one WP can hold a lock at any given time. Hence, the code between calling "job.lock" and "job.unlock" does not run in parallel on several nodes. This can be used, for example, to synchronize write-access to a file where only one WP can write at a given time. If a seconds WP calls "job.lock" while the lock is already owned by another WP, the second WP will wait until the lock is released.
+When you call "`job.lock`", the job enters a single-thread section. Only one WP can hold a lock at any given time. Hence, the code between calling "`job.lock`" and "`job.unlock`" does not run in parallel on several nodes. This can be used, for example, to synchronize write-access to a file where only one WP can write at a given time. If a seconds WP calls "`job.lock`" while the lock is already owned by another WP, the second WP will wait until the lock is released.
 
 
 
