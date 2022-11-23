@@ -31,6 +31,10 @@ The easiest way to do so is by using the MATLAB built-in GUI (requires R2016b or
 2. Search and Select `mym`
 3. Select *Add from GitHub*
 
+### Install "matlab_mym_parallel"
+Simply add the `matlab_mym_parallel` folder to your MATLAB path. Edit the credentials in the `mym_parallel_login.txt` if needed.
+
+
 ## Simple Example
 
 In order to use the distributed scheduler, you must have a valid login on the database. You can then create a new task by calling either on the workstation or on your desktop PC:
